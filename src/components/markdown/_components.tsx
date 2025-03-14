@@ -21,7 +21,7 @@ const getHeaderComponent = (function () {
   const $$$: { [key in TextHeaderType]: string } = {
     h1: "font-bold text-4xl mb-5",
     h2: "font-bold text-3xl mb-4",
-    h3: "font-bold text-4xl mb-3",
+    h3: "font-bold text-2xl mb-3",
     h4: "font-bold text-xl mb-2",
     h5: "font-bold text-lg mb-1",
     h6: "font-bold text-sm",
@@ -145,7 +145,56 @@ function Code({
     </div>
   );
 }
+function TableLogger({ children }: { children: React.ReactNode }) {
+  console.log("📊 Markdown Table Detected:", children);
+  return <>{children}</>;
+}
 
+function Table({ children }: { children: React.ReactNode | string }) {
+  return (
+    <TableLogger>
+      <div className="w-full overflow-x-auto my-4">
+        <table className="w-full border-collapse border border-gray-300 rounded-lg">
+          {children}
+        </table>
+      </div>
+    </TableLogger>
+  );
+}
+
+function TableHead({ children }: { children: React.ReactNode | string }) {
+  return <thead className="bg-gray-100">{children}</thead>;
+}
+
+function TableBody({ children }: { children: React.ReactNode | string }) {
+  return <tbody>{children}</tbody>;
+}
+
+function TableRow({ children }: { children: React.ReactNode | string }) {
+  return <tr className="even:bg-white odd:bg-gray-50">{children}</tr>;
+}
+
+function TableHeader({ children }: { children: React.ReactNode | string }) {
+  return (
+    <th className="px-4 py-3 border-b border-r border-gray-300 text-left font-medium text-gray-700">
+      {children}
+    </th>
+  );
+}
+
+function TableData({ children }: { children: React.ReactNode | string }) {
+  const processContent = (content) => {
+    if (typeof content === 'string') {
+      return content.replace(/\\n/g, '\n');
+    }
+    return content;
+  };
+  return (
+    <td className="px-4 py-3 border-b border-r border-gray-300 align-top">
+      <div className="whitespace-pre-line">{processContent(children)}</div>
+    </td>
+  );
+}
 export const MDComponents: Components = {
   h1: getHeaderComponent("h1"),
   h2: getHeaderComponent("h2"),
@@ -161,4 +210,10 @@ export const MDComponents: Components = {
   code: Code as any,
   br: Break,
   img: Image as any,
+  table: Table as any,
+  thead: TableHead as any,
+  tbody: TableBody as any,
+  tr: TableRow as any,
+  th: TableHeader as any,
+  td: TableData as any,
 };

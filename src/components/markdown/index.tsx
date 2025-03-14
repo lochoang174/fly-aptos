@@ -6,7 +6,7 @@ import { MDComponents } from "./_components";
 
 // Import types
 import type { MDContentProps } from "./type";
-
+import remarkGfm from "remark-gfm"; // Add this import
 export default function MDContent(props: MDContentProps) {
   // const [content, setContent] = React.useState("");
 
@@ -23,6 +23,8 @@ export default function MDContent(props: MDContentProps) {
   }
 
   return (
-    <ReactMarkdown components={MDComponents}>{props.children}</ReactMarkdown>
+    <ReactMarkdown components={MDComponents} remarkPlugins={[remarkGfm]} >
+      {props.children}
+    </ReactMarkdown>
   );
 }

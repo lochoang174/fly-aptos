@@ -339,7 +339,6 @@ const BountyList: React.FC = () => {
       const temp: IDetailBounty[] = await Promise.all(
         data.map(async (e) => {
           const da = await getPinataData(e.bounty_id);
-          console.log(da)
           return da;
         })
       );

@@ -40,6 +40,16 @@ function TextContentContainer(props: TextContentContainerProps) {
       {props.hasAIWriterAnimation ? (
         <AIWriter>
           <MDContent>{props.data.text}</MDContent>
+          {/* <MDContent>
+          {`
+  | Feature        | Support     |
+  | -------------- | ----------- |
+  | Tables         | ✅ Yes      |
+  | Strikethrough  | ~~text~~    |
+  | Task Lists     | - [x] Done  |
+  | URLs           | https://example.com |
+  `}
+</MDContent> */}
         </AIWriter>
       ) : (
         <MDContent>{props.data.text}</MDContent>
@@ -80,10 +90,7 @@ const ConversationDialog = React.forwardRef<
         logs={params as any}
       />
     );
-  } else if (
-    props.data.action === "" &&
-    props.data.params
-  ) {
+  } else if (props.data.action === "" && props.data.params) {
     const params = props.data.params as any;
     const amount = parseFloat(params.amount);
     const symbol = params.coinMetadata.symbol;
@@ -97,10 +104,7 @@ const ConversationDialog = React.forwardRef<
         logs={params as any}
       />
     );
-  } else if (
-    props.data.action === "" &&
-    props.data.params
-  ) {
+  } else if (props.data.action === "" && props.data.params) {
     const params = props.data.params as any;
     const amount = parseFloat(params.amount);
     const symbol = params.coinMetadata.symbol;
