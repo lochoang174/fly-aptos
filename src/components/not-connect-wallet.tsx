@@ -1,4 +1,5 @@
 import ConnectWallet from "./ui/connect-wallet";
+import { WalletSelector as AntdWalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
 
 export default function NotConnectWallet() {
   return (
@@ -8,7 +9,8 @@ export default function NotConnectWallet() {
         <h1 className="font-bold text-3xl">Surf faster with Fly Explorer</h1>
       </div>
       <p className="mb-3">You are not connected</p>
-      <ConnectWallet></ConnectWallet>
+      {/* <ConnectWallet></ConnectWallet> */}
+       <AntdWalletSelector />
     </div>
   );
 }

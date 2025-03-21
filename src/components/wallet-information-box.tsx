@@ -1,7 +1,8 @@
 // import { useState } from "react";
-import { useWallet } from "@razorlabs/razorkit";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 import ConnectWallet from "./ui/connect-wallet";
 import { ChevronsUpDown, LogOut, Users } from "lucide-react";
+import { User2 } from "lucide-react";
 
 // Import components
 // import { Avatar, AvatarFallback, AvatarImage } from "src/components/ui/avatar";
@@ -19,6 +20,7 @@ import {
   SidebarMenuItem,
 } from "src/components/ui/sidebar";
 import { WalletUtils } from "src/utils/wallet";
+import { useEffect } from "react";
 
 // Import hooks
 // import { useAuth } from "src/hooks/use-auth";
@@ -30,8 +32,11 @@ import { WalletUtils } from "src/utils/wallet";
 
 export default function WalletInformationBox() {
   // Get access to the wallet
-  const {disconnect, address, chain} = useWallet();
-  const isConnected = false
+  const { account, connected, wallet, changeNetwork, disconnect } = useWallet();
+  const isConnected = false;
+  useEffect(() => {
+    console.log("Address: " + account?.address);
+  }, [account?.address]);
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -43,17 +48,18 @@ export default function WalletInformationBox() {
             >
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold bg-blue text-black">
-                  <ConnectWallet />
+                  {/* <ConnectWallet /> */}
+                  <User2 />
                 </span>
               </div>
 
-              {isConnected === false && (
+              {connected === false && (
                 <ChevronsUpDown className="ml-auto size-4" />
               )}
             </SidebarMenuButton>
           </DropdownMenuTrigger>
 
-          {isConnected === false && (
+          {!connected === false && (
             <DropdownMenuContent
               className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg bg-sidebar"
               side="right"
@@ -63,8 +69,9 @@ export default function WalletInformationBox() {
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold text-center">
-                      {address && WalletUtils.censorAddress(address, 10, 10)}
+                    <span className="truncate font-semibold text-center text-black">
+                      {account?.address &&
+                        WalletUtils.censorAddress(account?.address.toString(), 10, 10)}
                     </span>
                   </div>
                 </div>

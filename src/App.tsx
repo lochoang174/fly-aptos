@@ -1,8 +1,8 @@
 // Import routes
 import RootRoutes from "./routes/RootRoutes";
-import "./wallet-custom.css";
-import { WalletProvider } from "@razorlabs/razorkit";
-import "@razorlabs/razorkit/style.css";
+import { WalletProvider } from "./utils/wallet/WalletSelector";
+import "./wallet.css";
+
 function App() {
   return (
     // add wallet provider

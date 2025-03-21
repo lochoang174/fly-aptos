@@ -72,9 +72,9 @@ export function AppSidebar() {
             ))}
         </div>
       </SidebarContent>
-      {/* <SidebarFooter className="bg-blue">
+      <SidebarFooter className="">
         <WalletInformationBox />
-      </SidebarFooter> */}
+      </SidebarFooter>
     </Sidebar>
   );
 }
