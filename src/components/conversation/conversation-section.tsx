@@ -20,7 +20,7 @@ export default function ConversationSection({
   const { setDoesFirstFetch, setAgentId, addDialog } = useConversationState();
 
   const _className =
-    "relative h-screen max-h-[calc(100dvh-45px-16px)] flex flex-col flex-1 pb-2";
+    "relative h-screen max-h-[88dvh] flex flex-col flex-1 pb-2 overflow-y-auto";
 
   React.useEffect(() => {
     // Promise.all([
@@ -52,7 +52,7 @@ export default function ConversationSection({
 
   return (
     <section className={cn(_className, className)}>
-      <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] -z-10"></div>
+      <div className="absolute h-full w-[1460px] max-w-[1460px]  [background-size:16px_16px] -z-10"></div>
       <RecommendationsBox />
       <ConversationDialogs />
       <ConversationController />

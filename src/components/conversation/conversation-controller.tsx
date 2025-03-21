@@ -1,5 +1,4 @@
 import React from "react";
-import { Send } from "lucide-react";
 
 // Import components
 import { Textarea } from "../ui/textarea";
@@ -18,6 +17,7 @@ import { ConversationUIUtils } from "./utils";
 
 // Import types
 import type { DialogType } from "src/objects/conversation/types";
+import SendIcon from "../../assets/icons/SendIcon";
 const inputPlaceHolder = "Start conversation with Fly Explorer...";
 
 /**
@@ -106,7 +106,7 @@ export default function ConversationController() {
         // Replace something
         if (suggestionContent.includes("{{WALLET ADDRESS}}")) {
           suggestionContent = suggestionContent.replace(
-            "{{WALLET ADDRESS}}",
+            "{{WALLET ADDRESS}}"
             // account address
           );
         }
@@ -203,19 +203,29 @@ export default function ConversationController() {
 
     // Handle submit
     const handleSubmit = function (target: HTMLDivElement) {
-       const contentMetadata = _getContentMetadata(target);
+      const contentMetadata = _getContentMetadata(target);
       console.log("Content:", contentMetadata);
       const userDialog = ConversationUtils.createDialog(
         contentMetadata.content
       );
-      
+
       // Find content: "insight || give me " -> add action: DATA_INSIGHT
       const findContent: string = contentMetadata.content.toLowerCase();
       // codition: "insight data", "what is the data", "show me the data purpose",
       // "give me insights", "data insight", "what is author post", "give me author post", "what post about", "what post about author"
-      if (findContent.includes("insight") || findContent.includes("what post about") || findContent.includes("give me") || findContent.includes("data") || findContent.includes("purpose") || findContent.includes("author post") || findContent.includes("post about") || findContent.includes("post about author")) {
+      if (
+        findContent.includes("insight") ||
+        findContent.includes("what post about") ||
+        findContent.includes("give me") ||
+        findContent.includes("data") ||
+        findContent.includes("purpose") ||
+        findContent.includes("author post") ||
+        findContent.includes("post about") ||
+        findContent.includes("post about author")
+      ) {
         contentMetadata.action = "DATA_INSIGHT";
-        contentMetadata.content = contentMetadata.content + " this is action DATA_INSIGHT";
+        contentMetadata.content =
+          contentMetadata.content + " this is action DATA_INSIGHT";
       }
       console.log("User Dialog:", userDialog);
 
@@ -413,12 +423,12 @@ export default function ConversationController() {
   }, [inputRef.current]);
 
   return (
-    <div className="relative w-full max-w-[840px] mx-auto border rounded-lg flex items-end px-3 py-2 bg-gray-100 hover:ring-2">
+    <div className="relative w-full max-w-[1000px] mx-auto border rounded-3xl flex  p-4  bg-gray-100 hover:ring-2 h-[108px]">
       <div
         id="user-input"
         contentEditable={conversation.responseStatus === "WAITING"}
         ref={inputRef}
-        className="w-full min-h-[60px] bg-transparent max-h-[156px] focus:outline-0"
+        className="w-full h-full bg-transparent focus:outline-0 placeholder:text-left align-top"
         onKeyDown={handleKeyDownEvent}
         onInput={handleInputEvent}
         onFocus={handleFocusEvent}
@@ -430,10 +440,11 @@ export default function ConversationController() {
           if (inputRef.current) handleSubmit(inputRef.current);
         }}
         variant="outline"
-        className="ms-2"
+        className="ms-2 self-end rounded-full bg-[#3F7BF1] px-3 py-1 w-[52px]"
         size="icon"
       >
-        <Send />
+        {/* <Send /> */}
+        <SendIcon/>
       </Button>
     </div>
   );

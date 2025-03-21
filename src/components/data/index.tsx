@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import cn from "classnames";
 
 // Import components
@@ -26,6 +26,11 @@ import {
 } from "../ui/sheet";
 import { Button } from "src/components/ui/button";
 import { Sparkle } from "lucide-react";
+import GraphViewer from "../graph/GraphViewer";
+import NodeDetails from "../graph/NodeDetail";
+import axios from "axios";
+import { BaseNode, EdgeType, ResponseType } from "@/types/NodeType";
+import GraphIcon from "../../assets/icons/GraphIcon";
 
 type DataCategoryProps = {
   data: KnowledgeCategoryType;
@@ -142,7 +147,43 @@ function DataCard(props: DataCardProps) {
 
 export default function Data({ className }: DataProps) {
   const { list, setListKnowledge } = useKnowledgeState();
+  const [selectedNode, setSelectedNode] = useState<BaseNode | null>(null);
+  const [nodes, setNodes] = useState<BaseNode[]>([]);
+  const [edges, setEdges] = useState<EdgeType[]>([]);
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const url = `${import.meta.env.VITE_API_SERVER_URL}/data`;
+      const response = await axios.get(url);
+      if (!response.data) return;
+
+      const res: ResponseType = response.data;
+
+      const processedNodes = res.nodes.map((node) => ({
+        ...node,
+        label: node.id,
+        fill: node.type === "keyword" ? "#FF6B6B" : "#4ECDC4",
+      }));
+
+      const processedEdges: EdgeType[] = res.edges.map((edge) => ({
+        ...edge,
+        id: `${edge.source}-${edge.target}`,
+      }));
+
+      setNodes(processedNodes);
+      setEdges(processedEdges);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   React.useEffect(() => {
     KnowledgeAPI.getKnowledge("").then((list) => {
       console.log(list);
@@ -152,19 +193,34 @@ export default function Data({ className }: DataProps) {
 
   return (
     <div className={cn("", className)}>
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="secondary" className="">Data Crawl</Button>
-      </SheetTrigger>
-      <SheetContent className="">
-        <div className="flex items-center gap-1 pb-2 border-b mb-2">
-          <Sparkle className="me-2" />
-          <h3 className="font-bold text-2xl">Crawl Result</h3>
-          <SheetClose asChild className="ms-auto">
-            <Button variant="outline">Close</Button>
-          </SheetClose>
-        </div>
-        {list.length === 0 ? (
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="default" className=" bg-[#0085FF] text-white text-[18px] font-extrabold rounded-3xl">
+            <GraphIcon />
+            Graph
+          </Button>
+        </SheetTrigger>
+        <SheetContent className="">
+          <div className="flex items-center gap-1 pb-2 border-b mb-2">
+            <Sparkle className="me-2" />
+            <h3 className="font-bold text-2xl">Graph Result</h3>
+            <SheetClose asChild className="ms-auto">
+              <Button variant="outline">Close</Button>
+            </SheetClose>
+          </div>
+          <div className="flex flex-col w-full h-full">
+            <GraphViewer
+              nodes={nodes}
+              edges={edges}
+              onSelectNode={setSelectedNode}
+            />
+            <NodeDetails
+              selectedNode={selectedNode}
+              edges={edges}
+              nodes={nodes}
+            />
+          </div>
+          {/* {list.length === 0 ? (
           <div className="w-full h-fit flex flex-col items-center px-2 py-3 border rounded-lg">
             <h3 className="text-2xl font-bold mb-1">Opps!!</h3>
             <p>An empty list, you should crawl data first!</p>
@@ -179,12 +235,12 @@ export default function Data({ className }: DataProps) {
               )}
             </div>
           </ScrollArea>
-        )}
-        <SheetFooter>
+        )} */}
+          {/* <SheetFooter>
           <SheetClose asChild>
             <Button variant="outline" className="p-4 shadow-lg">Extension crawler</Button>
           </SheetClose>
-        </SheetFooter>
+        </SheetFooter> */}
         </SheetContent>
       </Sheet>
     </div>

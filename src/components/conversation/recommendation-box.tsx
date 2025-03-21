@@ -24,7 +24,7 @@ export default function RecommendationsBox(props: RecommendationsBoxProps) {
           </span>
         </h1>
         {/* <img className="w-full max-w-[320px]" src="/logo.svg" /> */}
-        <Button variant="outline">
+        <Button variant="outline" className="text-xl">
           Interested in AI Agent to scrape web data?
         </Button>
       </div>

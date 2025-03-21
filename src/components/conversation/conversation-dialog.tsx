@@ -26,13 +26,13 @@ import type {
 
 function TextContentContainer(props: TextContentContainerProps) {
   const textContainerClassName =
-    "w-full border break-words rounded-lg shadow-sm px-2 py-3 hover:ring-2";
+    "w-full border break-words rounded-3xl shadow-sm px-5 py-2 hover:ring-2 ";
 
   return (
     <div
       className={cn(
         {
-          [`${textContainerClassName} bg-white`]: props.isUser,
+          [`${textContainerClassName} bg-[#0085FF] text-white max-w-max`]: props.isUser,
         },
         { [`${textContainerClassName} bg-slate-50`]: !props.isUser }
       )}
@@ -64,8 +64,8 @@ const ConversationDialog = React.forwardRef<
 >(function (props: ConversationDialogProps, ref) {
   // console.log("Data:", props.data);
 
-  const wrapperClassName = "flex flex-col w-full max-w-[920px] mt-3";
-  const containerClassName = "flex justify-start items-start w-3/4";
+  const wrapperClassName = "flex flex-col w-full max-w-[1220px] mt-3";
+  const containerClassName = "flex justify-start items-start text-[18px]";
 
   const isUser = props.data.sender === "user";
 
@@ -127,7 +127,7 @@ const ConversationDialog = React.forwardRef<
       ref={ref}
       className={cn(
         {
-          [`${wrapperClassName} items-end`]: isUser,
+          [`${wrapperClassName} items-end `]: isUser,
         },
         { [`${wrapperClassName}`]: !isUser }
       )}
@@ -140,19 +140,19 @@ const ConversationDialog = React.forwardRef<
           { [`${containerClassName}`]: !isUser }
         )}
       >
-        <div className="w-1/12">
+        <div className="mx-2">
           {isUser ? (
-            <Avatar className="flex justify-center items-center bg-background ms-3">
+            <Avatar className="me-3 w-full bg-white rounded-full p-1 flex items-center justify-center">
               <User />
             </Avatar>
           ) : (
-            <Avatar className="me-3">
+            <Avatar className="me-3 w-full bg-white rounded-full p-1">
               <AvatarImage src="/logo.svg" />
               <AvatarFallback>AI</AvatarFallback>
             </Avatar>
           )}
         </div>
-        <div className="w-11/12">
+        <div className="w-9/12">
           {ContentContainer}
           {/* Message controller */}
           {!isUser && (

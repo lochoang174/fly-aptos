@@ -56,8 +56,8 @@ export default function ConversationDialogs(props: ConversationDialogsProps) {
   }, [dialogs.length, dialogs[dialogs.length - 1]]);
 
   return (
-    <ScrollArea ref={containerRef} className="w-full flex flex-col flex-1 pb-6">
-      <div className="px-6 w-full max-w-[860px] mx-auto">
+    <ScrollArea ref={containerRef} className="w-full mx-auto flex flex-col flex-1 pb-6 items-center justify-center">
+      <div className="px-6 w-full flex flex-col items-center justify-center ">
         {DialogComponents}
       </div>
     </ScrollArea>
