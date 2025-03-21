@@ -302,7 +302,7 @@ const SidebarTrigger = React.forwardRef<
               onClick={() => navigate("/")}
             >
               <span className="text-[#1E293B] text-[32px] font-extrabold">FlyFish</span>
-              <span className="self-center">chat</span>
+              <span className="self-center">Chat</span>
             </BreadcrumbLink>
           </BreadcrumbItem>
           {parts.length > 0 &&
