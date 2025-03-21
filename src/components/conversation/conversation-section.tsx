@@ -20,7 +20,7 @@ export default function ConversationSection({
   const { setDoesFirstFetch, setAgentId, addDialog } = useConversationState();
 
   const _className =
-    "relative h-screen max-h-[88dvh] flex flex-col flex-1 pb-2 overflow-y-auto";
+    "relative h-screen max-h-[86dvh] overflow-hidden flex flex-col flex-1 pb-2 overflow-y-auto";
 
   React.useEffect(() => {
     // Promise.all([

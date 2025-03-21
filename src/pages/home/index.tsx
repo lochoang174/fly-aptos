@@ -3,7 +3,7 @@ import ConversationSection from "src/components/conversation/conversation-sectio
 
 export default function HomePage() {
   return (
-    <div className="flex-1 flex justify-evenly items-start w-full">
+    <div className="flex-1  flex justify-evenly items-start w-full">
       <ConversationSection className="w-8/12" />
     </div>
   );

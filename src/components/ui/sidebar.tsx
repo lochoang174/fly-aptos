@@ -31,7 +31,7 @@ import Data from "../data";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SIDEBAR_WIDTH = "100px";
+const SIDEBAR_WIDTH = "88px";
 const SIDEBAR_WIDTH_MOBILE = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
@@ -279,7 +279,7 @@ const SidebarTrigger = React.forwardRef<
   const parts = location.pathname.split("/").filter((part) => part !== "");
 
   return (
-    <div className="flex items-center border-b px-3 py-2 h-[84px]">
+    <div className="flex items-center border-b px-3 h-[64px]">
       {/* <Button
         ref={ref}
         data-sidebar="trigger"
@@ -295,7 +295,7 @@ const SidebarTrigger = React.forwardRef<
         <PanelLeft />
       </Button> */}
       <Breadcrumb>
-        <BreadcrumbList className="text-[20px]">
+        <BreadcrumbList className="text-[16px]">
           <BreadcrumbItem>
             <BreadcrumbLink
               className="cursor-pointer flex gap-6 ml-6"

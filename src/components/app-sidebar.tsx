@@ -50,7 +50,7 @@ export function AppSidebar() {
       collapsible="icon"
     >
       <SidebarHeader className="rounded-t-lg max-h-[45px]">
-        <div className="flex items-center justify-center mt-5">
+        <div className="flex items-center justify-center mt-2">
           <Avatar className="h-10 w-10 rounded-lg self-center">
             <AvatarImage src="/logo.svg" />
           </Avatar>

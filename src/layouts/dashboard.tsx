@@ -20,7 +20,7 @@ export default function DashboardLayout({
       <SidebarProvider>
         <AppSidebar />
         <div className="py-2 pe-2 w-full h-screen max-h-screen">
-          <main className="flex flex-col w-full overflow-auto  rounded-lg overflow-hidden bg-transparent backdrop-blur-md">
+          <main className="flex flex-col w-full overflow-auto  rounded-lg  bg-transparent backdrop-blur-md">
             <SidebarTrigger />
             {children}
           </main>
