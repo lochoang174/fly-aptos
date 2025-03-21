@@ -70,7 +70,7 @@ function Break() {
 }
 
 function Paragraph({ children }: { children: React.ReactNode | string }) {
-  return <p className="mb-2">{children}</p>;
+  return <p className="">{children}</p>;
 }
 
 function Pre({ children }: { children: React.ReactNode | string }) {

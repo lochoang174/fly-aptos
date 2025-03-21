@@ -44,13 +44,11 @@ export default function WalletInformationBox() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-sidebar-accent"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground hover:bg-sidebar-accent flex items-center justify-center"
             >
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold bg-blue text-black">
-                  {/* <ConnectWallet /> */}
-                  <User2 />
-                </span>
+              <div className="flex items-center justify-center w-full">
+                {/* <ConnectWallet /> */}
+                <User2 className="mx-auto" />
               </div>
 
               {connected === false && (
@@ -71,7 +69,11 @@ export default function WalletInformationBox() {
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-semibold text-center text-black">
                       {account?.address &&
-                        WalletUtils.censorAddress(account?.address.toString(), 10, 10)}
+                        WalletUtils.censorAddress(
+                          account?.address.toString(),
+                          10,
+                          10
+                        )}
                     </span>
                   </div>
                 </div>

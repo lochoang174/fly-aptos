@@ -65,7 +65,7 @@ const ConversationDialog = React.forwardRef<
   // console.log("Data:", props.data);
 
   const wrapperClassName = "flex flex-col w-full max-w-[1220px] mt-3";
-  const containerClassName = "flex justify-start items-start text-[18px]";
+  const containerClassName = "flex justify-start items-start text-[18px] m-[0px]";
 
   const isUser = props.data.sender === "user";
 
@@ -143,11 +143,11 @@ const ConversationDialog = React.forwardRef<
         <div className="mx-2">
           {isUser ? (
             <Avatar className="me-3 w-full bg-white rounded-full p-1 flex items-center justify-center">
-              <User />
+              <User className="w-6 h-auto"/>
             </Avatar>
           ) : (
-            <Avatar className="me-3 w-full bg-white rounded-full p-1">
-              <AvatarImage src="/logo.svg" />
+            <Avatar className="me-3 w-full bg-white rounded-full p-1 flex items-center justify-center">
+              <AvatarImage src="/logo.svg" className="w-6 h-auto" />
               <AvatarFallback>AI</AvatarFallback>
             </Avatar>
           )}
