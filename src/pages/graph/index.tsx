@@ -1,9 +1,8 @@
-import { ResponseType,BaseNode,EdgeType } from "../../types/NodeType";
+import { ResponseType, BaseNode, EdgeType } from "../../types/NodeType";
 import GraphViewer from "../../components/graph/GraphViewer";
 import NodeDetails from "../../components/graph/NodeDetail";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
 
 export default function GraphPage() {
   const [selectedNode, setSelectedNode] = useState<BaseNode | null>(null);
@@ -46,7 +45,16 @@ export default function GraphPage() {
 
   return (
     <div className="flex w-full h-[600px] gap-4">
-
+      {loading && (
+        <div className="absolute inset-0 bg-white bg-opacity-80 z-10 flex items-center justify-center">
+          <div className="flex flex-col items-center">
+            <div className="w-16 h-16 border-4 border-t-blue-500 border-b-blue-500 border-l-transparent border-r-transparent rounded-full animate-spin"></div>
+            <p className="mt-4 text-lg font-medium text-gray-700">
+              Loading graph data...
+            </p>
+          </div>
+        </div>
+      )}
 
       <GraphViewer nodes={nodes} edges={edges} onSelectNode={setSelectedNode} />
       <NodeDetails selectedNode={selectedNode} edges={edges} nodes={nodes} />
